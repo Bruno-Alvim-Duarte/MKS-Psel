@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { createMovieDto } from '../dto/movie.dto';
 import { AuthGuard } from '../auth/auth.guard';
@@ -21,5 +29,10 @@ export class MovieController {
   @Post('/movies')
   createMovie(@Body() movie: createMovieDto) {
     return this.movieService.createMovie(movie);
+  }
+
+  @Put('/movies/:id')
+  updateMovie(@Param('id') id: number, @Body() movie: createMovieDto) {
+    return this.movieService.updateMovie(id, movie);
   }
 }
