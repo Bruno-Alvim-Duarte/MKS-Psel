@@ -4,11 +4,14 @@ import { AppService } from './app.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MovieModule } from './movie/movie.module';
+import { Movie } from './entity/Movie';
 import { User } from './entity/User';
 
 @Module({
   imports: [
     AuthModule,
+    MovieModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST || 'localhost',
@@ -16,7 +19,7 @@ import { User } from './entity/User';
       username: process.env.DB_USER || 'postgres',
       password: process.env.DB_PASS || '123456',
       database: process.env.DB_NAME || 'mks-db',
-      entities: [User],
+      entities: [User, Movie],
       synchronize: true,
     }),
   ],
