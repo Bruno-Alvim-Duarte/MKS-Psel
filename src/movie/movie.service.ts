@@ -10,6 +10,6 @@ export class MovieService {
   ) {}
 
   getAllMovies() {
-    return this.movieRepository.findBy({ id: 1 });
+    return this.movieRepository.find();
   }
 }
