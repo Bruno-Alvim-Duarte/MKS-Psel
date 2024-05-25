@@ -12,4 +12,8 @@ export class MovieService {
   getAllMovies() {
     return this.movieRepository.find();
   }
+
+  getMovieById(id: number) {
+    return this.movieRepository.findBy({ id });
+  }
 }
