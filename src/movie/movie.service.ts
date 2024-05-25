@@ -14,8 +14,13 @@ export class MovieService {
     return this.movieRepository.find();
   }
 
-  getMovieById(id: number) {
-    return this.movieRepository.findBy({ id });
+  async getMovieById(id: number) {
+    const movie = await this.movieRepository.findOneBy({ id });
+    if (movie) {
+      return movie;
+    } else {
+      throw new NotFoundException('Movie not found');
+    }
   }
 
   createMovie(movie: createMovieDto) {
@@ -25,7 +30,7 @@ export class MovieService {
   async updateMovie(id: number, movie: createMovieDto) {
     const result = await this.movieRepository.update(id, movie);
     if (result.affected === 1) {
-      return this.movieRepository.findBy({ id });
+      return this.movieRepository.findOneBy({ id });
     } else {
       throw new NotFoundException('Movie not found');
     }
