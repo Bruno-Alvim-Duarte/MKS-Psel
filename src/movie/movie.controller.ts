@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
@@ -34,5 +36,11 @@ export class MovieController {
   @Put('/movies/:id')
   updateMovie(@Param('id') id: number, @Body() movie: createMovieDto) {
     return this.movieService.updateMovie(id, movie);
+  }
+
+  @Delete('/movies/:id')
+  @HttpCode(204)
+  deleteMovie(@Param('id') id: number) {
+    return this.movieService.deleteMovie(id);
   }
 }

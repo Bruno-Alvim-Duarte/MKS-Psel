@@ -30,4 +30,13 @@ export class MovieService {
       throw new NotFoundException('Movie not found');
     }
   }
+
+  async deleteMovie(id: number) {
+    const result = await this.movieRepository.delete(id);
+    if (result.affected === 1) {
+      return;
+    } else {
+      throw new NotFoundException('Movie not found');
+    }
+  }
 }
