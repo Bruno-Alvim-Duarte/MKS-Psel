@@ -17,7 +17,7 @@ export class MovieService {
     const moviesCached = await this.cacheManager.get('movies');
     const isMoviesFromCacheStale =
       !(await this.cacheManager.get('movies:validation'));
-    if (isMoviesFromCacheStale) {
+    if (isMoviesFromCacheStale && moviesCached) {
       const isRefetching = await this.cacheManager.get('movies:isRefetching');
       // se a busca no banco de dados já estiver sendo feita por alguma requisição, se enquanto isso chegar outra requisição não é necessário refazer a busca
       if (!isRefetching) {
@@ -31,10 +31,8 @@ export class MovieService {
       }
     }
     if (moviesCached) {
-      console.log('moviesCached');
       return moviesCached;
     }
-    console.log('moviesNotCached');
     const movies = await this.movieRepository.find();
     await this.cacheManager.set('movies', movies, 0);
     await this.cacheManager.set('movies:validation', 'true', 10000);
