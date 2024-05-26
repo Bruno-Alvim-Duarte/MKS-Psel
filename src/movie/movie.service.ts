@@ -15,11 +15,29 @@ export class MovieService {
 
   async getAllMovies() {
     const moviesCached = await this.cacheManager.get('movies');
+    const isMoviesFromCacheStale =
+      !(await this.cacheManager.get('movies:validation'));
+    if (isMoviesFromCacheStale) {
+      const isRefetching = await this.cacheManager.get('movies:isRefetching');
+      // se a busca no banco de dados já estiver sendo feita por alguma requisição, se enquanto isso chegar outra requisição não é necessário refazer a busca
+      if (!isRefetching) {
+        await this.cacheManager.set('movies:isRefetching', 'true', 1000);
+        console.log('cache is stale - refetching...');
+        setTimeout(async () => {
+          const movies = await this.movieRepository.find();
+          await this.cacheManager.set('movies', movies, 0);
+          await this.cacheManager.set('movies:validation', 'true', 10000);
+        }, 0);
+      }
+    }
     if (moviesCached) {
+      console.log('moviesCached');
       return moviesCached;
     }
+    console.log('moviesNotCached');
     const movies = await this.movieRepository.find();
-    await this.cacheManager.set('movies', movies, 10000);
+    await this.cacheManager.set('movies', movies, 0);
+    await this.cacheManager.set('movies:validation', 'true', 10000);
     return movies;
   }
 
