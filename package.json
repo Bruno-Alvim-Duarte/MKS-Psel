@@ -22,9 +22,12 @@
       "migration:run": "npm run typeorm migration:run",
       "migration:generate": "npm run typeorm migration:generate",
       "migration:revert": "npm run typeorm migration:revert",
-      "db:reset": "npm run migration:revert && npm run migration:run"
+      "db:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop -d src/database/index.ts",
+      "db:create": "ts-node ./node_modules/typeorm/cli.js schema:sync -d src/database/index.ts",
+      "db:reset": "npm run db:drop && npm run db:create"
    },
    "dependencies": {
+      "@nestjs/cache-manager": "^2.2.2",
       "@nestjs/common": "^10.0.0",
       "@nestjs/core": "^10.0.0",
       "@nestjs/jwt": "^10.2.0",
@@ -33,6 +36,7 @@
       "@nestjs/typeorm": "^10.0.2",
       "@types/bcryptjs": "^2.4.6",
       "bcryptjs": "^2.4.3",
+      "cache-manager": "^5.5.3",
       "class-transformer": "^0.5.1",
       "class-validator": "^0.14.1",
       "pg": "^8.4.0",
