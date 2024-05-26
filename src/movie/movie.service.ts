@@ -14,16 +14,10 @@ export class MovieService {
   ) {}
 
   async getAllMovies() {
-    let usouCache = 0;
     const moviesCached = await this.cacheManager.get('movies');
     if (moviesCached) {
-      console.log(moviesCached);
-      usouCache += 1;
-      console.log('usou o cache', usouCache);
-      console.log(await this.cacheManager.get('bas'));
       return moviesCached;
     }
-    console.log('não veio do cache');
     const movies = await this.movieRepository.find();
     await this.cacheManager.set('movies', movies, 10000);
     return movies;
