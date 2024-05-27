@@ -37,7 +37,6 @@ A aplicação está hospedada na AWS em EC2 em um ambiente dockerizado, e você 
 
 ### Rodando os containers
 ```bash
-# to run docker-compose
 $ docker-compose up -d
 ```
 
