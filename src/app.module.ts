@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -23,7 +21,7 @@ import { User } from './entity/User';
       synchronize: true,
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService, JwtService],
+  controllers: [],
+  providers: [JwtService],
 })
 export class AppModule {}
