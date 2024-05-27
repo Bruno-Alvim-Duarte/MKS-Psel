@@ -22,52 +22,45 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descrição - MKS Desafio técnico Backend
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) 
+Este repositório contém um projeto Nest.js desenvolvido para um desafio técnico. O objetivo é criar um catálogo de filmes que só pode ser acessado por usuários autenticados.
 
-## Installation
+## Deploy e Documentação
 
+A aplicação está hospedada na AWS em EC2 em um ambiente dockerizado, e você pode acessar a documentação através deste link:
+
+[Swagger Documentation](http://18.229.141.109:3000/api)
+
+## Rodando com o Docker localmente
+
+### Rodando os containers
 ```bash
-$ npm install
+# to run docker-compose
+$ docker-compose up -d
 ```
 
-## Running the app
-
+### Rodando o comando pra criar o banco de dados
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ docker exec -it mks-backend sh
+$ npm run db:reset
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+### Agora é só utilizar a API normalmente
+```
+# Documentação no seguinte link:
+http://localhost:3000/api
 ```
 
-## Support
+## Experiência
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- TypeScript - 1 ano.
+- Nest.js - Primeiro projeto.
+- TypeORM - Primeiro projeto.
+- JWT - 1 ano.
+- Swagger - 4 meses.
+- Docker - 1 ano.
+- Cache Manager - Primeiro projeto.
+- Postgresql - Primeiro Projeto.
+- AWS - 6 meses.
